@@ -1,0 +1,43 @@
+@import 'tailwindcss';
+@plugin "daisyui";
+
+@theme {
+  --color-midnight-blue: #001f3f;
+}
+
+body {
+  background-color: #001f3f;
+  font-family: 'Jost', sans-serif;
+}
+
+h1,
+h2 {
+  font-family: 'Prosto One', cursive;
+}
+
+@media (max-width: 435px) {
+  .my-element {
+    @apply text-lg;
+  }
+  .my-element_2 {
+    @apply flex-col;
+  }
+}
+
+@media (max-width: 475px) {
+  .my-title {
+    @apply text-xl;
+  }
+}
+
+@media (max-width: 390px) {
+  .my-element {
+    @apply text-base;
+  }
+}
+
+@layer components {
+  .pressable {
+    @apply transition-transform duration-150 ease-out active:scale-95 active:brightness-90;
+  }
+}

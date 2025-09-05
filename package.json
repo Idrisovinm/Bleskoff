@@ -1,0 +1,49 @@
+{
+  "name": "clean-project",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build",
+    "format": "prettier --write src/"
+  },
+  "dependencies": {
+    "@formkit/auto-animate": "^0.8.2",
+    "@iconify-icons/heroicons": "^1.2.9",
+    "@iconify/vue": "^5.0.0",
+    "@tailwindcss/vite": "^4.1.11",
+    "@types/lodash-es": "^4.17.12",
+    "axios": "^1.11.0",
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
+    "pinia": "^3.0.3",
+    "tailwindcss": "^4.1.11",
+    "voximplant-websdk": "^4.10.0-2922",
+    "vue": "^3.5.17",
+    "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@tsconfig/node22": "^22.0.2",
+    "@types/express": "^5.0.3",
+    "@types/node": "^22.15.32",
+    "@types/node-fetch": "^2.6.13",
+    "@vitejs/plugin-vue": "^6.0.0",
+    "@vue/tsconfig": "^0.7.0",
+    "daisyui": "^5.1.6",
+    "npm-run-all2": "^8.0.4",
+    "prettier": "3.5.3",
+    "typescript": "~5.8.0",
+    "vite": "^7.0.0",
+    "vite-plugin-vue-devtools": "^7.7.7",
+    "vue-tsc": "^2.2.10"
+  },
+  "description": "This template should help get you started developing with Vue 3 in Vite.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
