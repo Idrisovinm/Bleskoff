@@ -33,17 +33,17 @@ import { Icon } from '@iconify/vue'
                 <span class="font-bold text-blue-600">БлескOFF</span> – это инновационная платформа,
                 созданная для того, чтобы сделать выбор клининговых услуг
                 <span class="text-blue-500 font-semibold">простым</span>,
-                <span class="text-green-500 font-semibold">быстрым</span> и
-                <span class="text-blue-600 font-semibold">надёжным</span>.
+                <span class="text-blue-500 font-semibold">быстрым</span> и
+                <span class="text-blue-500 font-semibold">надёжным</span>.
               </p>
             </div>
 
             <div class="bg-white p-6 rounded-2xl shadow-lg border-l-4 border-primary">
               <p class="text-xl leading-relaxed text-gray-700">
                 Мы объединяем
-                <span class="text-blue-600 font-semibold">лучшие клининговые компании</span>
+                <span class="text-blue-500 font-semibold">лучшие клининговые компании</span>
                 в одном месте, чтобы вы могли найти
-                <span class="text-green-500 font-semibold">идеальное решение</span>
+                <span class="text-blue-500 font-semibold">идеальное решение</span>
                 для своих нужд <span class="text-blue-500 font-semibold">без лишних хлопот</span>.
               </p>
             </div>

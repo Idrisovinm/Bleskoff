@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import CooperationForm from '@/components/CooperationPage/CooperationForm.vue'
 import { Icon } from '@iconify/vue'
+
+const scrollToForm = () => {
+  if (window.location.pathname === '/cooperation') {
+    // Если уже на странице cooperation
+    const formElement = document.getElementById('form')
+    formElement?.scrollIntoView({ behavior: 'smooth' })
+  }
+}
 </script>
 
 <template>
@@ -29,6 +37,14 @@ import { Icon } from '@iconify/vue'
               Рост дохода
             </div>
           </div>
+          <button
+            @click="scrollToForm"
+            type="button"
+            class="btn bg-blue-500 border-none mt-8 hover:bg-blue-600 btn-lg rounded-full px-8 text-white"
+          >
+            <Icon icon="heroicons:chat-bubble-left-20-solid" class="w-5 h-5 mr-2" />
+            Заполнить форму
+          </button>
         </div>
       </div>
     </div>
