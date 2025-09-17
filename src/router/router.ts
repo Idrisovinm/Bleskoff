@@ -12,14 +12,20 @@ const router = createRouter({
     {
       path: '/about-us',
       name: 'about-us',
-      component: () => import('../views/AboutUs.vue'),
+      component: () => import('../views/AboutUsPage.vue'),
       meta: { title: 'О нас' },
     },
     {
-      path: '/cooperation-page',
+      path: '/cooperation',
       name: 'cooperation',
       component: () => import('../views/CooperationPage.vue'),
       meta: { title: 'Cотрудничество' },
+    },
+    {
+      path: '/contacts',
+      name: 'contacts',
+      component: () => import('../views/ContactsPage.vue'),
+      meta: { title: 'Контакты' },
     },
     {
       path: '/:pathMatch(.*)*',

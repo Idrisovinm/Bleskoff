@@ -6,7 +6,7 @@ import BurgerButton from './BurgerButton.vue'
 const navigation = [
   { name: 'Топ компаний', path: '/' },
   { name: 'О нас', path: '/about-us' },
-  { name: 'Сотрудничество', path: '/cooperation-page' },
+  { name: 'Сотрудничество', path: '/cooperation' },
   { name: 'Контакты', path: '/contacts' },
 ]
 

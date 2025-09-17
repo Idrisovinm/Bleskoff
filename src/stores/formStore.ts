@@ -11,6 +11,7 @@ export const useFormStore = defineStore('form', () => {
     contact: '',
     phone: '',
     email: '',
+    message: '',
   })
 
   const errors = reactive<FormErrors>({})
@@ -25,12 +26,13 @@ export const useFormStore = defineStore('form', () => {
       console.log(form)
       const response = await f.post('/submit-form', form)
 
-      alert('Форма успешно отправлена!')
+      alert('Форма успешно отправлена! Мы свяжемся с вами в ближайшее время.')
 
       form.company = ''
       form.contact = ''
       form.phone = ''
       form.email = ''
+      form.message = ''
       return response.data
     } catch (error: any) {
       console.error('Ошибка:', error)

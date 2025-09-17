@@ -4,6 +4,7 @@ export interface FormData {
   contact: string
   phone: string
   email: string
+  message: string
 }
 
 // Типы для ошибок формы
@@ -12,20 +13,21 @@ export interface FormErrors {
   contact?: string
   phone?: string
   email?: string
+  message?: string
 }
 
 // Пропсы для компонента FormInput
 export interface FormInputProps {
-  modelValue: string | number
-  id?: string
+  modelValue: string
   label?: string
-  type?: 'text' | 'email' | 'password' | 'tel' | 'number' | 'date'
-  error?: string
-  required?: boolean
   placeholder?: string
+  type?: string
+  required?: boolean
+  error?: string
+  icon?: string // Добавляем свойство для иконки
+  id?: string
 }
 
-// События для компонента FormInput
 export interface FormInputEmits {
-  (e: 'update:modelValue', value: string | number): void
+  (e: 'update:modelValue', value: string): void
 }

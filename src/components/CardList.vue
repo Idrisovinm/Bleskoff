@@ -88,7 +88,7 @@ const callPhone = () => {
         <!-- Поле поиска -->
         <div class="flex-1 w-full">
           <label
-            class="input input-bordered input-lg flex items-center gap-3 w-full bg-base-200/50"
+            class="input input-bordered border-none input-lg flex items-center gap-3 w-full bg-base-200/50"
           >
             <Icon icon="heroicons:magnifying-glass-20-solid" class="w-5 h-5 text-base-content/70" />
             <input
