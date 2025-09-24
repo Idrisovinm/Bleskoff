@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import CooperationForm from '@/components/CooperationPage/CooperationForm.vue'
+import ContactModal from '@/components/ContactModal.vue'
 import { Icon } from '@iconify/vue'
+import { useContactStore } from '@/stores/contactStore'
+
+const contactStore = useContactStore()
 
 const scrollToForm = () => {
   if (window.location.pathname === '/cooperation') {
@@ -9,219 +13,491 @@ const scrollToForm = () => {
     formElement?.scrollIntoView({ behavior: 'smooth' })
   }
 }
+
+const openContactModal = () => {
+  contactStore.openContactModal()
+}
 </script>
 
 <template>
-  <div class="min-h-screen bg-white">
+  <div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
     <!-- Hero Section -->
-    <div
-      class="hero min-h-screen bg-cover bg-center bg-no-repeat"
-      style="
-        background-image: url('https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
-      "
-    >
+    <div class="relative min-h-screen overflow-hidden">
+      <!-- Background with overlay -->
+      <div
+        class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style="
+          background-image: url('https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+        "
+      ></div>
       <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent"></div>
-      <div class="hero-content text-center text-white mt-15">
-        <div class="max-w-4xl">
-          <h1 class="text-4xl md:text-5xl font-bold mb-6">Сотрудничество</h1>
-          <p class="text-2xl max-sm:text-xl mb-8">
-            Присоединяйтесь к нашей платформе и расширяйте свой бизнес
-          </p>
-          <div class="flex flex-wrap justify-center gap-4">
-            <div class="badge bg-blue-100 text-blue-700 border-blue-200 badge-lg p-4">
-              <Icon icon="heroicons:user-group" class="w-4 h-4 mr-2" />
-              Новые клиенты
+
+      <!-- Content -->
+      <div class="relative z-10 flex items-center justify-center min-h-screen pt-32 lg:pt-40 pb-16">
+        <div class="container mx-auto px-4">
+          <div class="max-w-5xl mx-auto text-center text-white">
+            <!-- Logo and Brand -->
+            <!-- <div class="flex justify-center items-center mb-8">
+              <div class="relative">
+                <div
+                  class="bg-gradient-to-r from-blue-500 to-blue-600 p-6 rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+                >
+                  <img src="/src/assets/logo.png" alt="БлескOFF" class="h-12 w-auto" />
+                </div>
+                <div
+                  class="absolute -top-2 -right-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full"
+                >
+                  #1
+                </div>
+              </div>
+            </div> -->
+
+            <!-- Main Heading -->
+            <h1
+              class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent"
+            >
+              Сотрудничество
+            </h1>
+
+            <p
+              class="text-lg sm:text-xl md:text-2xl mb-12 text-blue-100 max-w-3xl mx-auto leading-relaxed"
+            >
+              Присоединяйтесь к нашей платформе и расширяйте свой бизнес
+            </p>
+
+            <!-- Feature Cards -->
+            <div class="grid md:grid-cols-2 gap-6 mb-12 max-w-4xl mx-auto">
+              <div
+                class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group"
+              >
+                <div
+                  class="flex items-center justify-center w-16 h-16 bg-blue-500 rounded-2xl mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
+                >
+                  <Icon icon="heroicons:user-group-20-solid" class="w-8 h-8 text-white" />
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold mb-4">Новые клиенты</h3>
+                <p class="text-blue-100 leading-relaxed">
+                  Получите доступ к
+                  <span class="text-yellow-300 font-semibold">тысячам потенциальных клиентов</span>
+                  и увеличьте свою клиентскую базу в
+                  <span class="text-yellow-300 font-semibold">несколько раз</span>.
+                </p>
+              </div>
+
+              <div
+                class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group"
+              >
+                <div
+                  class="flex items-center justify-center w-16 h-16 bg-green-500 rounded-2xl mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
+                >
+                  <Icon icon="heroicons:chart-bar-20-solid" class="w-8 h-8 text-white" />
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold mb-4">Рост дохода</h3>
+                <p class="text-blue-100 leading-relaxed">
+                  Увеличьте свой доход с помощью
+                  <span class="text-yellow-300 font-semibold">современной системы</span>
+                  подбора заказов и
+                  <span class="text-yellow-300 font-semibold">прозрачных условий</span>.
+                </p>
+              </div>
             </div>
-            <div class="badge bg-green-100 text-green-700 border-green-200 badge-lg p-4">
-              <Icon icon="heroicons:chart-bar" class="w-4 h-4 mr-2" />
-              Рост дохода
+
+            <!-- Benefits -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+              <div
+                class="bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-6 py-3 hover:bg-white/25 transition-all duration-300"
+              >
+                <span class="flex items-center text-white font-semibold">
+                  <Icon
+                    icon="heroicons:check-circle-20-solid"
+                    class="w-5 h-5 mr-2 text-green-400"
+                  />
+                  Гибкие условия
+                </span>
+              </div>
+              <div
+                class="bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-6 py-3 hover:bg-white/25 transition-all duration-300"
+              >
+                <span class="flex items-center text-white font-semibold">
+                  <Icon icon="heroicons:megaphone-20-solid" class="w-5 h-5 mr-2 text-blue-400" />
+                  Продвижение услуг
+                </span>
+              </div>
+              <div
+                class="bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-6 py-3 hover:bg-white/25 transition-all duration-300"
+              >
+                <span class="flex items-center text-white font-semibold">
+                  <Icon
+                    icon="heroicons:arrow-trending-up-20-solid"
+                    class="w-5 h-5 mr-2 text-yellow-400"
+                  />
+                  Быстрый старт
+                </span>
+              </div>
             </div>
+
+            <!-- CTA Button -->
+            <button
+              @click="scrollToForm"
+              class="btn btn-outline btn-lg rounded-full px-8 border-white text-white hover:bg-white hover:text-blue-600 transition-all duration-300"
+            >
+              <Icon icon="heroicons:user-plus-20-solid" class="w-6 h-6 mr-2" />
+              Стать партнером
+            </button>
           </div>
-          <button
-            @click="scrollToForm"
-            type="button"
-            class="btn bg-blue-500 border-none mt-8 hover:bg-blue-600 btn-lg rounded-full px-8 text-white"
-          >
-            <Icon icon="heroicons:chat-bubble-left-20-solid" class="w-5 h-5 mr-2" />
-            Заполнить форму
-          </button>
         </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <Icon icon="heroicons:chevron-down-20-solid" class="w-8 h-8 text-white/70" />
       </div>
     </div>
 
     <!-- Main Content -->
-    <div class="container mx-auto px-4 py-12">
+    <div class="container mx-auto px-4 py-20">
       <!-- Intro Section -->
-      <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold text-gray-800 mb-6">
-          <span class="text-blue-600">БлескOFF</span> приглашает к сотрудничеству
+      <div class="text-center mb-20">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-gray-800">
+          <span class="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent"
+            >БлескOFF</span
+          >
+          приглашает к сотрудничеству
         </h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
           Присоединяйтесь к нашей платформе и получайте доступ к тысячам потенциальных клиентов.
           Увеличивайте свой доход с помощью современной системы подбора заказов.
         </p>
       </div>
 
       <!-- Benefits Section -->
-      <div class="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 mb-16">
-        <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">
+      <div
+        class="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-3xl shadow-2xl p-12 mb-20"
+      >
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 text-center mb-16">
           Преимущества для партнеров
         </h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
           <!-- Benefit 1 -->
-          <div class="text-center">
+          <div class="text-center group">
             <div
-              class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto"
+              class="w-24 h-24 bg-gradient-to-r from-blue-500 to-blue-600 rounded-3xl flex items-center justify-center mb-8 mx-auto shadow-xl group-hover:scale-110 group-hover:shadow-blue-500/25 transition-all duration-300"
             >
-              <Icon icon="heroicons:arrow-trending-up" class="w-10 h-10 text-blue-600" />
+              <Icon icon="heroicons:arrow-trending-up-20-solid" class="w-12 h-12 text-white" />
             </div>
-            <h3 class="text-xl font-semibold text-gray-800 mb-4">Увеличение клиентской базы</h3>
-            <p class="text-gray-600">Доступ к нашей аудитории потенциальных заказчиков</p>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-800 mb-6">
+              Увеличение клиентской базы
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Доступ к нашей аудитории потенциальных заказчиков и возможность значительно расширить
+              свой бизнес
+            </p>
           </div>
 
           <!-- Benefit 2 -->
-          <div class="text-center">
+          <div class="text-center group">
             <div
-              class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6 mx-auto"
+              class="w-24 h-24 bg-gradient-to-r from-green-500 to-emerald-600 rounded-3xl flex items-center justify-center mb-8 mx-auto shadow-xl group-hover:scale-110 group-hover:shadow-green-500/25 transition-all duration-300"
             >
-              <Icon icon="heroicons:cog-6-tooth" class="w-10 h-10 text-green-600" />
+              <Icon icon="heroicons:cog-6-tooth-20-solid" class="w-12 h-12 text-white" />
             </div>
-            <h3 class="text-xl font-semibold text-gray-800 mb-4">Гибкие условия</h3>
-            <p class="text-gray-600">Выгодные тарифы и прозрачная система комиссий</p>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-800 mb-6">Гибкие условия</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Выгодные тарифы, прозрачная система комиссий и индивидуальный подход к каждому
+              партнеру
+            </p>
           </div>
 
           <!-- Benefit 3 -->
-          <div class="text-center">
+          <div class="text-center group">
             <div
-              class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto"
+              class="w-24 h-24 bg-gradient-to-r from-purple-500 to-purple-600 rounded-3xl flex items-center justify-center mb-8 mx-auto shadow-xl group-hover:scale-110 group-hover:shadow-purple-500/25 transition-all duration-300"
             >
-              <Icon icon="heroicons:megaphone" class="w-10 h-10 text-blue-600" />
+              <Icon icon="heroicons:megaphone-20-solid" class="w-12 h-12 text-white" />
             </div>
-            <h3 class="text-xl font-semibold text-gray-800 mb-4">Поддержка и продвижение</h3>
-            <p class="text-gray-600">Реклама ваших услуг на нашей платформе</p>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-800 mb-6">
+              Поддержка и продвижение
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Реклама ваших услуг на нашей платформе и полная маркетинговая поддержка
+            </p>
           </div>
         </div>
       </div>
 
       <!-- How It Works Section -->
-      <div class="bg-gray-50 rounded-2xl p-8 mb-16">
-        <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">Как стать партнером?</h2>
+      <div class="bg-gradient-to-r from-gray-50 to-blue-50 rounded-3xl p-12 mb-20">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 text-center mb-16">
+          Как стать партнером?
+        </h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
           <!-- Step 1 -->
-          <div class="text-center">
+          <div class="text-center group">
             <div
-              class="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center text-xl font-bold mb-4 mx-auto"
+              class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-6 mx-auto shadow-lg group-hover:scale-110 transition-all duration-300"
             >
               1
             </div>
-            <h3 class="font-semibold text-gray-800 mb-2">Заявка</h3>
-            <p class="text-gray-600 text-sm">Заполните форму заявки</p>
+            <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-4">Заявка</h3>
+            <p class="text-gray-600">Заполните форму заявки на нашем сайте</p>
           </div>
 
           <!-- Step 2 -->
-          <div class="text-center">
+          <div class="text-center group">
             <div
-              class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center text-xl font-bold mb-4 mx-auto"
+              class="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-6 mx-auto shadow-lg group-hover:scale-110 transition-all duration-300"
             >
               2
             </div>
-            <h3 class="font-semibold text-gray-800 mb-2">Связь</h3>
-            <p class="text-gray-600 text-sm">Менеджер свяжется с вами</p>
+            <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-4">Связь</h3>
+            <p class="text-gray-600">Менеджер свяжется с вами в течение дня</p>
           </div>
 
           <!-- Step 3 -->
-          <div class="text-center">
+          <div class="text-center group">
             <div
-              class="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center text-xl font-bold mb-4 mx-auto"
+              class="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-6 mx-auto shadow-lg group-hover:scale-110 transition-all duration-300"
             >
               3
             </div>
-            <h3 class="font-semibold text-gray-800 mb-2">Договор</h3>
-            <p class="text-gray-600 text-sm">Подпишем договор</p>
+            <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-4">Договор</h3>
+            <p class="text-gray-600">Подпишем выгодный договор сотрудничества</p>
           </div>
 
           <!-- Step 4 -->
-          <div class="text-center">
+          <div class="text-center group">
             <div
-              class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center text-xl font-bold mb-4 mx-auto"
+              class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-6 mx-auto shadow-lg group-hover:scale-110 transition-all duration-300"
             >
               4
             </div>
-            <h3 class="font-semibold text-gray-800 mb-2">Заказы</h3>
-            <p class="text-gray-600 text-sm">Начните получать заказы</p>
+            <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-4">Заказы</h3>
+            <p class="text-gray-600">Начните получать заказы уже на следующий день</p>
           </div>
         </div>
       </div>
 
       <!-- Stats Section -->
-      <div class="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 mb-16">
-        <div class="stats stats-vertical lg:stats-horizontal w-full bg-transparent">
-          <div class="stat">
-            <div class="stat-figure text-blue-500">
-              <Icon icon="heroicons:building-office" class="w-8 h-8" />
+      <div
+        class="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-3xl shadow-2xl p-12 mb-20"
+      >
+        <div class="stats stats-vertical lg:stats-horizontal w-full bg-transparent shadow-none">
+          <div class="stat text-center">
+            <div class="stat-figure text-blue-500 mb-4">
+              <Icon icon="heroicons:building-office-20-solid" class="w-12 h-12" />
             </div>
-            <div class="stat-title text-gray-600">Компаний-партнеров</div>
-            <div class="stat-value text-blue-600">150+</div>
-            <div class="stat-desc text-gray-500">Уже с нами</div>
+            <div class="stat-title text-gray-600 text-lg">Компаний-партнеров</div>
+            <div class="stat-value text-blue-600 text-5xl font-bold">150+</div>
+            <div class="stat-desc text-gray-500 text-lg">Уже с нами</div>
           </div>
 
-          <div class="stat">
-            <div class="stat-figure text-green-500">
-              <Icon icon="heroicons:users" class="w-8 h-8" />
+          <div class="stat text-center">
+            <div class="stat-figure text-green-500 mb-4">
+              <Icon icon="heroicons:users-20-solid" class="w-12 h-12" />
             </div>
-            <div class="stat-title text-gray-600">Клиентов в месяц</div>
-            <div class="stat-value text-green-600">10K+</div>
-            <div class="stat-desc text-gray-500">Активная аудитория</div>
+            <div class="stat-title text-gray-600 text-lg">Клиентов в месяц</div>
+            <div class="stat-value text-green-600 text-5xl font-bold">10K+</div>
+            <div class="stat-desc text-gray-500 text-lg">Активная аудитория</div>
           </div>
 
-          <div class="stat">
-            <div class="stat-figure text-blue-500">
-              <Icon icon="heroicons:arrow-trending-up" class="w-8 h-8" />
+          <div class="stat text-center">
+            <div class="stat-figure text-purple-500 mb-4">
+              <Icon icon="heroicons:arrow-trending-up-20-solid" class="w-12 h-12" />
             </div>
-            <div class="stat-title text-gray-600">Рост заказов</div>
-            <div class="stat-value text-blue-600">40%</div>
-            <div class="stat-desc text-gray-500">За последний год</div>
+            <div class="stat-title text-gray-600 text-lg">Рост заказов</div>
+            <div class="stat-value text-purple-600 text-5xl font-bold">40%</div>
+            <div class="stat-desc text-gray-500 text-lg">За последний год</div>
           </div>
         </div>
       </div>
 
       <!-- Form Section -->
-      <div id="form" class="bg-white border border-gray-200 rounded-2xl shadow-lg p-8">
-        <h2 class="text-3xl font-bold text-gray-800 text-center mb-8">Станьте нашим партнером</h2>
-        <p class="text-xl text-gray-600 text-center mb-12 max-w-2xl mx-auto">
-          Заполните форму ниже и наш менеджер свяжется с вами для обсуждения условий сотрудничества
-        </p>
+      <div
+        class="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden"
+      >
+        <!-- Background decoration -->
+        <div class="absolute inset-0 opacity-10">
+          <div class="absolute top-10 left-10 w-32 h-32 bg-blue-500 rounded-full blur-3xl"></div>
+          <div
+            class="absolute bottom-10 right-10 w-40 h-40 bg-purple-500 rounded-full blur-3xl"
+          ></div>
+          <div
+            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-green-500 rounded-full blur-3xl"
+          ></div>
+        </div>
 
-        <CooperationForm />
+        <div class="container mx-auto px-4 relative z-10">
+          <div class="text-center mb-16">
+            <div
+              class="inline-flex items-center bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold mb-4"
+            >
+              <Icon icon="heroicons:document-text-20-solid" class="w-4 h-4 mr-2" />
+              Заявка на партнерство
+            </div>
+            <h2
+              class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-gray-800 to-blue-600 bg-clip-text text-transparent mb-6"
+            >
+              Готовы стать партнером?
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+              Заполните форму ниже, и мы свяжемся с вами в течение 24 часов
+            </p>
+          </div>
+
+          <div id="form" class="mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+              class="bg-white/80 backdrop-blur-sm border border-white/50 rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl p-4 sm:p-6 md:p-8 lg:p-12 hover:shadow-2xl sm:hover:shadow-3xl transition-all duration-500 relative"
+            >
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-600/10 rounded-2xl sm:rounded-3xl opacity-0 hover:opacity-100 transition-opacity duration-300"
+              ></div>
+              <div class="relative z-10">
+                <CooperationForm />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- CTA Section -->
-    <div class="bg-blue-500 text-white py-16">
-      <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold mb-4">Остались вопросы?</h2>
-        <p class="text-xl mb-8">Свяжитесь с нами напрямую для консультации</p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="tel:+78001234567"
-            class="btn bg-white text-blue-600 hover:bg-gray-100 btn-lg rounded-full px-8"
+    <!-- Final CTA Section -->
+    <div
+      class="py-24 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 relative overflow-hidden"
+    >
+      <!-- Animated background elements -->
+      <div class="absolute inset-0">
+        <div
+          class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-600/30 to-purple-600/30"
+        ></div>
+        <div
+          class="absolute top-20 left-20 w-96 h-96 bg-blue-500 rounded-full blur-3xl opacity-20 animate-pulse"
+        ></div>
+        <div
+          class="absolute bottom-20 right-20 w-80 h-80 bg-purple-500 rounded-full blur-3xl opacity-20 animate-pulse"
+          style="animation-delay: 1s"
+        ></div>
+        <div
+          class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-pink-500 rounded-full blur-3xl opacity-15 animate-pulse"
+          style="animation-delay: 2s"
+        ></div>
+      </div>
+
+      <!-- Floating particles -->
+      <div class="absolute inset-0 overflow-hidden">
+        <div
+          class="absolute top-1/4 left-1/4 w-2 h-2 bg-white rounded-full opacity-60 animate-bounce"
+          style="animation-delay: 0.5s"
+        ></div>
+        <div
+          class="absolute top-3/4 left-3/4 w-1 h-1 bg-blue-300 rounded-full opacity-80 animate-bounce"
+          style="animation-delay: 1.5s"
+        ></div>
+        <div
+          class="absolute top-1/2 right-1/4 w-1.5 h-1.5 bg-purple-300 rounded-full opacity-70 animate-bounce"
+          style="animation-delay: 2.5s"
+        ></div>
+      </div>
+
+      <div class="container mx-auto px-4 text-center relative z-10">
+        <!-- Badge -->
+        <div
+          class="inline-flex items-center bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-full text-sm font-semibold mb-8"
+        >
+          <Icon icon="heroicons:rocket-launch-20-solid" class="w-5 h-5 mr-2" />
+          Начните сотрудничество
+        </div>
+
+        <!-- Main heading -->
+        <h2
+          class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-8 leading-tight"
+        >
+          Готовы стать
+          <span
+            class="bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 bg-clip-text text-transparent"
           >
-            <Icon icon="heroicons:phone" class="w-5 h-5 mr-2" />
-            +7 (903) 429-26-65
-          </a>
-          <a
-            href="mailto:partners@bleskoff.ru"
-            class="btn btn-outline border-white text-white hover:bg-white hover:text-blue-600 btn-lg rounded-full px-8"
+            партнером?
+          </span>
+        </h2>
+
+        <p
+          class="text-lg sm:text-xl md:text-2xl text-blue-100 mb-12 max-w-4xl mx-auto leading-relaxed"
+        >
+          Присоединяйтесь к нашей партнерской программе и начните зарабатывать уже сегодня.
+          <span class="text-yellow-300 font-semibold">Более 150 компаний</span> уже работают с нами.
+        </p>
+
+        <!-- Statistics row -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto">
+          <div
+            class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300"
           >
-            <Icon icon="heroicons:envelope" class="w-5 h-5 mr-2" />
-            bleskoff84@mail.ru
-          </a>
+            <div class="text-3xl font-bold text-white mb-2">24 часа</div>
+            <div class="text-blue-200">Время ответа</div>
+          </div>
+          <div
+            class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300"
+          >
+            <div class="text-3xl font-bold text-white mb-2">30%</div>
+            <div class="text-blue-200">Комиссия партнера</div>
+          </div>
+          <div
+            class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300"
+          >
+            <div class="text-3xl font-bold text-white mb-2">0₽</div>
+            <div class="text-blue-200">Стоимость входа</div>
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <button
+            @click="scrollToForm"
+            class="group relative btn btn-lg bg-gradient-to-r from-yellow-400 to-orange-500 border-none text-gray-900 hover:from-yellow-500 hover:to-orange-600 rounded-full px-10 py-4 shadow-2xl hover:shadow-yellow-500/25 transform hover:scale-105 transition-all duration-300 font-bold text-lg"
+          >
+            <Icon
+              icon="heroicons:document-text-20-solid"
+              class="w-6 h-6 mr-3 group-hover:rotate-6 transition-transform duration-300"
+            />
+            Заполнить заявку
+          </button>
+
+          <button
+            @click="openContactModal"
+            class="group btn btn-outline btn-lg border-2 border-white text-white hover:bg-white hover:text-purple-600 rounded-full px-10 py-4 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 font-bold text-lg"
+          >
+            <Icon
+              icon="heroicons:phone-20-solid"
+              class="w-6 h-6 mr-3 group-hover:rotate-6 transition-transform duration-300"
+            />
+            Связаться с нами
+          </button>
+        </div>
+
+        <!-- Trust indicators -->
+        <div
+          class="mt-16 flex flex-col sm:flex-row items-center justify-center gap-8 text-blue-200"
+        >
+          <div class="flex items-center">
+            <Icon icon="heroicons:shield-check-20-solid" class="w-5 h-5 mr-2 text-green-400" />
+            <span>Надежное партнерство</span>
+          </div>
+          <div class="flex items-center">
+            <Icon icon="heroicons:clock-20-solid" class="w-5 h-5 mr-2 text-blue-400" />
+            <span>Быстрое оформление</span>
+          </div>
+          <div class="flex items-center">
+            <Icon icon="heroicons:currency-dollar-20-solid" class="w-5 h-5 mr-2 text-yellow-400" />
+            <span>Высокий доход</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Contact Modal -->
+  <ContactModal />
 </template>
 
 <style scoped>
@@ -233,5 +509,20 @@ const scrollToForm = () => {
 .stat {
   border: none;
   background: transparent;
+}
+
+/* Дополнительные анимации */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.group:hover .stat-figure {
+  animation: float 2s ease-in-out infinite;
 }
 </style>

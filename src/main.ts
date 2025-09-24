@@ -17,6 +17,4 @@ app.use(autoAnimatePlugin)
 app.use(router)
 app.use(pinia)
 
-// Глобальные компоненты PrimeVue
-
 app.mount('#app')

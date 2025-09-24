@@ -20,14 +20,14 @@
       </div>
     </div>
     <div class="flex flex-col gap-4 w-1/2 max-sm:w-full">
-      <h2 class="text-white">О нас</h2>
+      <h2 class="text-lg sm:text-xl text-white">О нас</h2>
       <p class="text-white">
         БлескOFF — это команда, которая экономит Ваше время и помогает в выборе. Наши партнеры это
         проверенные компании на рынке клининговых услуг.
       </p>
     </div>
     <div class="flex flex-col gap-4">
-      <h2 class="text-white">Контакты</h2>
+      <h2 class="text-lg sm:text-xl text-white">Контакты</h2>
       <div class="flex items-center">
         <svg
           class="h-5 w-5 text-blue-500 mr-3"

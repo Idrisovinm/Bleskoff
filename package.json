@@ -16,13 +16,10 @@
     "@iconify-icons/heroicons": "^1.2.9",
     "@iconify/vue": "^5.0.0",
     "@tailwindcss/vite": "^4.1.11",
-    "@types/lodash-es": "^4.17.12",
     "axios": "^1.11.0",
-    "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
     "pinia": "^3.0.3",
     "tailwindcss": "^4.1.11",
-    "voximplant-websdk": "^4.10.0-2922",
     "vue": "^3.5.17",
     "vue-router": "^4.5.1"
   },

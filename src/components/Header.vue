@@ -2,6 +2,8 @@
 import { ref, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import BurgerButton from './BurgerButton.vue'
+import ContactModal from './ContactModal.vue'
+import { useContactStore } from '@/stores/contactStore'
 
 const navigation = [
   { name: 'Топ компаний', path: '/' },
@@ -12,13 +14,12 @@ const navigation = [
 
 const isMenuOpen = ref(false)
 const route = useRoute()
+const contactStore = useContactStore()
 
 const isScrolled = ref(false)
-const headerRef = ref<HTMLElement | null>(null)
 
-const callPhone = () => {
-  const phoneNumber = '+7 (903) 429-26-65'
-  window.location.href = `tel:${phoneNumber}`
+const openContactModal = () => {
+  contactStore.openContactModal()
 }
 
 const handleScroll = () => {
@@ -51,7 +52,6 @@ watch(
     itemscope
     itemtype="https://schema.org/Organization"
     role="banner"
-    ref="headerRef"
     aria-label="Главная навигация"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -87,7 +87,7 @@ watch(
         <!-- Правая часть -->
         <button
           type="button"
-          @click="callPhone"
+          @click="openContactModal"
           class="hidden md:block cursor-pointer bg-gradient-to-r from-blue-500 to-blue-600 text-white px-5 py-2.5 rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition duration-200 shadow-md hover:shadow-lg"
         >
           Связаться с нами
@@ -116,7 +116,7 @@ watch(
           <div class="pt-4 border-t border-gray-200/50">
             <button
               type="button"
-              @click="callPhone"
+              @click="openContactModal"
               class="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-3 rounded-lg font-medium transition duration-200 shadow-md hover:shadow-lg"
             >
               Связаться с нами
@@ -125,5 +125,8 @@ watch(
         </nav>
       </div>
     </div>
+    
+    <!-- Модальное окно для выбора способа связи -->
+    <ContactModal />
   </header>
 </template>

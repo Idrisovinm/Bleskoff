@@ -17,9 +17,10 @@ coverage
 /cypress/videos/
 /cypress/screenshots/
 
-# .gitignore
+# Environment variables (содержат секретные данные)
 .env.local
 .env.*.local
+.env
 
 # Editor directories and files
 .vscode/*
@@ -32,3 +33,6 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# Docker volumes and runtime data (keep Dockerfile, docker-compose.yml, .dockerignore in repo)
+docker-compose.override.yml
