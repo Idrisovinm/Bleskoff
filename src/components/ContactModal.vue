@@ -9,7 +9,7 @@ const contactStore = useContactStore()
   <!-- Modal Overlay -->
   <div
     v-if="contactStore.isContactModalOpen"
-    class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
     @click.self="contactStore.closeContactModal"
   >
     <!-- Modal Container -->
@@ -109,6 +109,22 @@ const contactStore = useContactStore()
   }
   to {
     opacity: 1;
+  }
+}
+
+/* Анимация появления модального контейнера */
+.bg-white {
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
 </style>

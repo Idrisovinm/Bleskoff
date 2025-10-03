@@ -13,6 +13,7 @@ import { useContactStore } from '@/stores/contactStore'
 const PhoneInputModal = defineAsyncComponent(() => import('./PhoneInputModal.vue'))
 const SuccessModal = defineAsyncComponent(() => import('./SuccessModal.vue'))
 const ContactModal = defineAsyncComponent(() => import('./ContactModal.vue'))
+const Calculator = defineAsyncComponent(() => import('./Calculator.vue'))
 
 const voxStore = useVoximplantStore()
 const contactStore = useContactStore()
@@ -21,6 +22,12 @@ const isLoading = ref(true)
 const searchQuery = ref('')
 
 const selectedSort = ref<'asc' | 'desc' | null>(null)
+
+// Данные калькулятора - только диапазон бюджета
+const calculatorData = ref({
+  budgetFrom: null as number | null,
+  budgetTo: null as number | null,
+})
 
 // Состояние для PhoneInputModal
 const showPhoneModal = ref(false)
@@ -48,16 +55,57 @@ const debouncedSearch = debounce((value: string) => {
 }, 300)
 
 const filteredCompanies = computed(() => {
-  const searchLower = searchQuery.value.toLowerCase()
+  const searchLower = searchQuery.value.toLowerCase().trim()
   const sortType = selectedSort.value
+  const { budgetFrom, budgetTo } = calculatorData.value
 
-  let filtered = companyCard.filter((company: Company) => {
-    return (
-      company.name.toLowerCase().includes(searchLower) ||
-      company.services.some((service) => service.toLowerCase().includes(searchLower))
-    )
-  })
+  let filtered = companyCard
 
+  // Фильтрация по поисковому запросу
+  if (searchLower.length > 0) {
+    filtered = filtered.filter((company: Company) => {
+      return (
+        company.name.toLowerCase().includes(searchLower) ||
+        company.services.some((service) => service.toLowerCase().includes(searchLower))
+      )
+    })
+  }
+
+  // Фильтрация по бюджету
+  // Дополнительная проверка на валидность значений
+  const validBudgetFrom =
+    budgetFrom !== null && budgetFrom !== undefined && !isNaN(budgetFrom) && budgetFrom > 0
+      ? budgetFrom
+      : null
+  const validBudgetTo =
+    budgetTo !== null && budgetTo !== undefined && !isNaN(budgetTo) && budgetTo > 0
+      ? budgetTo
+      : null
+
+  if (validBudgetFrom !== null || validBudgetTo !== null) {
+    filtered = filtered.filter((company: Company) => {
+      const companyPrice = company.price
+
+      // Если указан только budgetFrom
+      if (validBudgetFrom !== null && validBudgetTo === null) {
+        return companyPrice >= validBudgetFrom
+      }
+
+      // Если указан только budgetTo
+      if (validBudgetFrom === null && validBudgetTo !== null) {
+        return companyPrice <= validBudgetTo
+      }
+
+      // Если указаны оба значения
+      if (validBudgetFrom !== null && validBudgetTo !== null) {
+        return companyPrice >= validBudgetFrom && companyPrice <= validBudgetTo
+      }
+
+      return true
+    })
+  }
+
+  // Сортировка
   if (sortType) {
     filtered = [...filtered].sort((a, b) => {
       const result = sortType === 'asc' ? a.price - b.price : b.price - a.price
@@ -89,11 +137,11 @@ const closeContactModal = () => {
 const handleOpenPhoneModal = (companyPhone: string, companyName: string) => {
   console.log('handleOpenPhoneModal - received companyName:', companyName)
   console.log('handleOpenPhoneModal - received companyPhone:', companyPhone)
-  
+
   currentCompanyPhone.value = companyPhone
   currentCompanyName.value = companyName
   showPhoneModal.value = true
-  
+
   console.log('handleOpenPhoneModal - set currentCompanyName:', currentCompanyName.value)
 }
 
@@ -109,19 +157,15 @@ const handlePhoneSubmit = async (phoneNumber: string) => {
   // Сохраняем название компании перед закрытием модального окна
   const companyName = currentCompanyName.value
   const companyPhone = currentCompanyPhone.value
-  
+
   console.log('handlePhoneSubmit - companyName:', companyName)
   console.log('handlePhoneSubmit - companyPhone:', companyPhone)
-  
+
   // Закрываем модальное окно
   handleClosePhoneModal()
 
   // Выполняем звонок с введенным номером
-  const success = await voxStore.makeCall(
-    companyPhone,
-    companyName,
-    phoneNumber,
-  )
+  const success = await voxStore.makeCall(companyPhone, companyName, phoneNumber)
 
   // Показываем результат
   if (success) {
@@ -147,16 +191,42 @@ const handleShowResult = (type: 'success' | 'error', title: string, message: str
   successModalMessage.value = message
   showSuccessModal.value = true
 }
+
+// Проверка активности фильтров
+const hasActiveFilters = computed(() => {
+  const searchLower = searchQuery.value.toLowerCase().trim()
+  return searchLower.length > 0
+})
+
+// Обработка изменений в калькуляторе - только диапазон бюджета
+const handleCalculatorChange = (data: any) => {
+  calculatorData.value = {
+    budgetFrom: data.budgetFrom,
+    budgetTo: data.budgetTo,
+  }
+}
+
+// Полный сброс всех фильтров
+const resetAllFilters = () => {
+  searchQuery.value = ''
+  selectedSort.value = null
+  calculatorData.value = {
+    budgetFrom: null,
+    budgetTo: null,
+  }
+}
 </script>
 
 <template>
   <div class="container max-sm:px-3 px-4 mx-auto">
     <!-- Заголовок секции -->
     <div class="text-center mb-8 sm:mb-12">
-      <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 px-2">
-        Выберите лучшую компанию
+      <h2
+        class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 px-2"
+      >
+        Выберите подходящую компанию
       </h2>
-      <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
+      <p class="text-base text-gray-600 max-w-2xl mx-auto px-4">
         Используйте фильтры и поиск, чтобы найти идеального исполнителя для ваших задач
       </p>
     </div>
@@ -168,7 +238,9 @@ const handleShowResult = (type: 'success' | 'error', title: string, message: str
       <div class="card-body p-4 sm:p-6">
         <!-- Поле поиска -->
         <div class="relative mb-4 sm:mb-6">
-          <div class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none z-10">
+          <div
+            class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none z-10"
+          >
             <svg
               class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600"
               fill="none"
@@ -205,7 +277,12 @@ const handleShowResult = (type: 'success' | 'error', title: string, message: str
                   : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 hover:border-blue-300 hover:shadow-lg',
               ]"
             >
-              <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -224,7 +301,12 @@ const handleShowResult = (type: 'success' | 'error', title: string, message: str
                   : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 hover:border-blue-300 hover:shadow-lg',
               ]"
             >
-              <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -238,15 +320,28 @@ const handleShowResult = (type: 'success' | 'error', title: string, message: str
         </div>
 
         <!-- Активные фильтры -->
-        <div v-if="searchQuery || selectedSort" class="space-y-3 sm:space-y-4">
+        <div
+          v-if="searchQuery || selectedSort || calculatorData.budgetFrom || calculatorData.budgetTo"
+          class="space-y-3 sm:space-y-4"
+        >
           <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
             <h4 class="font-medium text-gray-600 text-sm sm:text-base">Активные фильтры:</h4>
             <button
-              @click="((searchQuery = ''), handleSortClick(null))"
+              @click="resetAllFilters"
               class="btn btn-sm bg-gradient-to-r from-red-50 to-red-100 border border-red-200 text-red-600 hover:from-red-100 hover:to-red-200 hover:border-red-300 hover:text-red-700 hover:scale-105 transition-all duration-200 rounded-xl shadow-md font-medium w-full sm:w-auto"
             >
-              <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              <svg
+                class="w-3 h-3 sm:w-4 sm:h-4 mr-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
               </svg>
               Сбросить все
             </button>
@@ -282,6 +377,21 @@ const handleShowResult = (type: 'success' | 'error', title: string, message: str
                 <Icon icon="heroicons:x-mark-20-solid" class="w-3 h-3" />
               </button>
             </div>
+
+            <div
+              v-if="calculatorData.budgetFrom || calculatorData.budgetTo"
+              class="badge bg-green-50 text-green-700 border-green-200 px-2 sm:px-3 py-1 sm:py-2 text-xs sm:text-sm"
+            >
+              Бюджет:
+              {{ calculatorData.budgetFrom ? calculatorData.budgetFrom.toLocaleString() : '0' }} -
+              {{ calculatorData.budgetTo ? calculatorData.budgetTo.toLocaleString() : '∞' }} ₽
+              <button
+                @click="calculatorData = { budgetFrom: null, budgetTo: null }"
+                class="ml-1 sm:ml-2 hover:text-red-600"
+              >
+                <Icon icon="heroicons:x-mark-20-solid" class="w-3 h-3" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -290,12 +400,20 @@ const handleShowResult = (type: 'success' | 'error', title: string, message: str
     <!-- Результаты -->
     <div class="mb-6 sm:mb-8">
       <div class="flex items-center justify-between">
-        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 sm:p-6 rounded-2xl shadow-lg border border-blue-100 backdrop-blur-sm w-full">
+        <div
+          class="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 sm:p-6 rounded-2xl shadow-lg border border-blue-100 backdrop-blur-sm w-full"
+        >
           <div class="flex items-center space-x-2 sm:space-x-3">
-            <div class="w-2 h-2 sm:w-3 sm:h-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full animate-pulse"></div>
-            <h3 class="text-lg sm:text-xl font-bold bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-transparent">
-              Найдено компаний: 
-              <span class="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-extrabold text-xl sm:text-2xl ml-1 sm:ml-2">
+            <div
+              class="w-2 h-2 sm:w-3 sm:h-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full animate-pulse"
+            ></div>
+            <h3
+              class="text-lg sm:text-xl font-bold bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-transparent"
+            >
+              {{ hasActiveFilters ? 'Найдено компаний:' : 'Всего компаний:' }}
+              <span
+                class="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-extrabold text-xl sm:text-2xl ml-1 sm:ml-2"
+              >
                 {{ filteredCompanies.length }}
               </span>
             </h3>
@@ -304,46 +422,59 @@ const handleShowResult = (type: 'success' | 'error', title: string, message: str
       </div>
     </div>
 
-    <!-- Карточки компаний -->
-    <div class="grid grid-cols-1 gap-6 sm:gap-8">
-      <template v-if="isLoading">
-        <SkeletonCard
-          v-for="n in skeletonCount"
-          :key="`skeleton-${n}`"
-          class="transition-opacity duration-300"
-        />
-      </template>
+    <!-- Основная компоновка с калькулятором и карточками -->
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <!-- Калькулятор слева -->
+      <div class="lg:col-span-1">
+        <Calculator @calculatorChange="handleCalculatorChange" />
+      </div>
 
-      <template v-else>
-        <CompanyCard
-          v-for="company in filteredCompanies"
-          :key="company.id"
-          :company="company"
-          class="transition-all duration-300 ease-out hover:scale-[1.02] hover:shadow-2xl"
-          @openPhoneModal="handleOpenPhoneModal"
-        />
+      <!-- Карточки компаний справа -->
+      <div class="lg:col-span-3">
+        <div class="space-y-4">
+          <template v-if="isLoading">
+            <SkeletonCard
+              v-for="n in skeletonCount"
+              :key="`skeleton-${n}`"
+              class="transition-opacity duration-300"
+            />
+          </template>
 
-        <!-- Сообщение если ничего не найдено -->
-        <div
-          v-if="filteredCompanies.length === 0"
-          class="text-center py-20 bg-white rounded-3xl shadow-xl border border-gray-200"
-        >
-          <div
-            class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6"
-          >
-            <Icon icon="heroicons:magnifying-glass-20-solid" class="w-12 h-12 text-gray-400" />
-          </div>
-          <h3 class="text-xl sm:text-2xl font-bold text-gray-700 mb-3">Ничего не найдено</h3>
-          <p class="text-gray-500 text-lg mb-6">Попробуйте изменить параметры поиска или фильтры</p>
-          <button
-            @click="((searchQuery = ''), handleSortClick(null))"
-            class="btn btn-primary bg-blue-500 border-blue-500 hover:bg-blue-600 text-white rounded-full px-6"
-          >
-            <Icon icon="heroicons:arrow-path-20-solid" class="w-4 h-4 mr-2" />
-            Сбросить фильтры
-          </button>
+          <template v-else>
+            <CompanyCard
+              v-for="company in filteredCompanies"
+              :key="company.id"
+              :company="company"
+              :calculator-data="calculatorData"
+              class="transition-all duration-300 ease-out"
+              @openPhoneModal="handleOpenPhoneModal"
+            />
+
+            <!-- Сообщение если ничего не найдено -->
+            <div
+              v-if="filteredCompanies.length === 0"
+              class="text-center py-20 bg-white rounded-3xl shadow-xl border border-gray-200"
+            >
+              <div
+                class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6"
+              >
+                <Icon icon="heroicons:magnifying-glass-20-solid" class="w-12 h-12 text-gray-400" />
+              </div>
+              <h3 class="text-xl sm:text-2xl font-bold text-gray-700 mb-3">Ничего не найдено</h3>
+              <p class="text-gray-500 text-lg mb-6">
+                Попробуйте изменить параметры поиска или фильтры
+              </p>
+              <button
+                @click="resetAllFilters"
+                class="btn btn-primary bg-blue-500 border-blue-500 hover:bg-blue-600 text-white rounded-full px-6"
+              >
+                <Icon icon="heroicons:arrow-path-20-solid" class="w-4 h-4 mr-2" />
+                Сбросить фильтры
+              </button>
+            </div>
+          </template>
         </div>
-      </template>
+      </div>
     </div>
 
     <!-- CTA Section -->

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
+import ContactModal from './components/ContactModal.vue'
 import { useVoximplantStore } from './stores/voximplantStore'
 
 import { useRoute } from 'vue-router'
@@ -21,5 +22,8 @@ voxStore.initializeVoximplant().then((success) => {
     </main>
 
     <Footer v-if="!route.meta?.hideHeaderFooter" />
+    
+    <!-- Глобальное модальное окно для выбора способа связи -->
+    <ContactModal />
   </div>
 </template>

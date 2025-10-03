@@ -2,7 +2,6 @@
 import { ref, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import BurgerButton from './BurgerButton.vue'
-import ContactModal from './ContactModal.vue'
 import { useContactStore } from '@/stores/contactStore'
 
 const navigation = [
@@ -125,8 +124,5 @@ watch(
         </nav>
       </div>
     </div>
-    
-    <!-- Модальное окно для выбора способа связи -->
-    <ContactModal />
   </header>
 </template>

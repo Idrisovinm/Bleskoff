@@ -12,14 +12,11 @@ const companies = ref<Company[]>([...companyCard])
 <template>
   <div class="min-h-screen bg-white">
     <!-- Hero Section -->
-    <div
-      class="hero min-h-screen bg-cover bg-center bg-no-repeat relative overflow-hidden"
-      style="background-image: url('@/assets/towfiqu-barbhuiya--9gPKrsbGmc-unsplash.jpg')"
-    >
+    <div class="hero bg-cover bg-center bg-no-repeat relative overflow-hidden">
       <!-- Overlay -->
       <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent"></div>
 
-      <div class="hero-content text-center text-white relative z-10 mt-16">
+      <div class="hero-content pt-32 text-center text-white relative z-10">
         <div class="max-w-4xl">
           <!-- Логотип и заголовок -->
           <div class="flex justify-center items-center mb-8">
@@ -30,9 +27,11 @@ const companies = ref<Company[]>([...companyCard])
             </div>
           </div>
 
-          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Топ компаний</h1>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            Клининг маркет
+          </h1>
           <p class="text-lg sm:text-xl md:text-2xl opacity-90 mb-8 leading-relaxed">
-            Лучшие клининговые услуги от проверенных исполнителей
+            Самый большой выбор клининговых компаний
           </p>
 
           <!-- Преимущества -->

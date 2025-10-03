@@ -26,9 +26,7 @@ const openContactModal = () => {
       <!-- Background with overlay -->
       <div
         class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style="
-          background-image: url('https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
-        "
+        style="background-image: url('/src/assets/photo-1556228453-efd6c1ff04f6.jpg')"
       ></div>
       <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent"></div>
 
@@ -37,20 +35,13 @@ const openContactModal = () => {
         <div class="container mx-auto px-4">
           <div class="max-w-5xl mx-auto text-center text-white">
             <!-- Logo and Brand -->
-            <!-- <div class="flex justify-center items-center mb-8">
-              <div class="relative">
-                <div
-                  class="bg-gradient-to-r from-blue-500 to-blue-600 p-6 rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
-                >
-                  <img src="/src/assets/logo.png" alt="БлескOFF" class="h-12 w-auto" />
-                </div>
-                <div
-                  class="absolute -top-2 -right-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full"
-                >
-                  #1
-                </div>
+            <div class="flex justify-center items-center mb-8">
+              <div
+                class="bg-primary text-primary-content p-4 rounded-2xl shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300"
+              >
+                <span class="text-4xl font-bold">Блеск<span class="text-white">OFF</span></span>
               </div>
-            </div> -->
+            </div>
 
             <!-- Main Heading -->
             <h1
@@ -357,139 +348,6 @@ const openContactModal = () => {
                 <CooperationForm />
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Final CTA Section -->
-    <div
-      class="py-24 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 relative overflow-hidden"
-    >
-      <!-- Animated background elements -->
-      <div class="absolute inset-0">
-        <div
-          class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-600/30 to-purple-600/30"
-        ></div>
-        <div
-          class="absolute top-20 left-20 w-96 h-96 bg-blue-500 rounded-full blur-3xl opacity-20 animate-pulse"
-        ></div>
-        <div
-          class="absolute bottom-20 right-20 w-80 h-80 bg-purple-500 rounded-full blur-3xl opacity-20 animate-pulse"
-          style="animation-delay: 1s"
-        ></div>
-        <div
-          class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-pink-500 rounded-full blur-3xl opacity-15 animate-pulse"
-          style="animation-delay: 2s"
-        ></div>
-      </div>
-
-      <!-- Floating particles -->
-      <div class="absolute inset-0 overflow-hidden">
-        <div
-          class="absolute top-1/4 left-1/4 w-2 h-2 bg-white rounded-full opacity-60 animate-bounce"
-          style="animation-delay: 0.5s"
-        ></div>
-        <div
-          class="absolute top-3/4 left-3/4 w-1 h-1 bg-blue-300 rounded-full opacity-80 animate-bounce"
-          style="animation-delay: 1.5s"
-        ></div>
-        <div
-          class="absolute top-1/2 right-1/4 w-1.5 h-1.5 bg-purple-300 rounded-full opacity-70 animate-bounce"
-          style="animation-delay: 2.5s"
-        ></div>
-      </div>
-
-      <div class="container mx-auto px-4 text-center relative z-10">
-        <!-- Badge -->
-        <div
-          class="inline-flex items-center bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-full text-sm font-semibold mb-8"
-        >
-          <Icon icon="heroicons:rocket-launch-20-solid" class="w-5 h-5 mr-2" />
-          Начните сотрудничество
-        </div>
-
-        <!-- Main heading -->
-        <h2
-          class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-8 leading-tight"
-        >
-          Готовы стать
-          <span
-            class="bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 bg-clip-text text-transparent"
-          >
-            партнером?
-          </span>
-        </h2>
-
-        <p
-          class="text-lg sm:text-xl md:text-2xl text-blue-100 mb-12 max-w-4xl mx-auto leading-relaxed"
-        >
-          Присоединяйтесь к нашей партнерской программе и начните зарабатывать уже сегодня.
-          <span class="text-yellow-300 font-semibold">Более 150 компаний</span> уже работают с нами.
-        </p>
-
-        <!-- Statistics row -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto">
-          <div
-            class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300"
-          >
-            <div class="text-3xl font-bold text-white mb-2">24 часа</div>
-            <div class="text-blue-200">Время ответа</div>
-          </div>
-          <div
-            class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300"
-          >
-            <div class="text-3xl font-bold text-white mb-2">30%</div>
-            <div class="text-blue-200">Комиссия партнера</div>
-          </div>
-          <div
-            class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300"
-          >
-            <div class="text-3xl font-bold text-white mb-2">0₽</div>
-            <div class="text-blue-200">Стоимость входа</div>
-          </div>
-        </div>
-
-        <!-- CTA Buttons -->
-        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <button
-            @click="scrollToForm"
-            class="group relative btn btn-lg bg-gradient-to-r from-yellow-400 to-orange-500 border-none text-gray-900 hover:from-yellow-500 hover:to-orange-600 rounded-full px-10 py-4 shadow-2xl hover:shadow-yellow-500/25 transform hover:scale-105 transition-all duration-300 font-bold text-lg"
-          >
-            <Icon
-              icon="heroicons:document-text-20-solid"
-              class="w-6 h-6 mr-3 group-hover:rotate-6 transition-transform duration-300"
-            />
-            Заполнить заявку
-          </button>
-
-          <button
-            @click="openContactModal"
-            class="group btn btn-outline btn-lg border-2 border-white text-white hover:bg-white hover:text-purple-600 rounded-full px-10 py-4 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 font-bold text-lg"
-          >
-            <Icon
-              icon="heroicons:phone-20-solid"
-              class="w-6 h-6 mr-3 group-hover:rotate-6 transition-transform duration-300"
-            />
-            Связаться с нами
-          </button>
-        </div>
-
-        <!-- Trust indicators -->
-        <div
-          class="mt-16 flex flex-col sm:flex-row items-center justify-center gap-8 text-blue-200"
-        >
-          <div class="flex items-center">
-            <Icon icon="heroicons:shield-check-20-solid" class="w-5 h-5 mr-2 text-green-400" />
-            <span>Надежное партнерство</span>
-          </div>
-          <div class="flex items-center">
-            <Icon icon="heroicons:clock-20-solid" class="w-5 h-5 mr-2 text-blue-400" />
-            <span>Быстрое оформление</span>
-          </div>
-          <div class="flex items-center">
-            <Icon icon="heroicons:currency-dollar-20-solid" class="w-5 h-5 mr-2 text-yellow-400" />
-            <span>Высокий доход</span>
           </div>
         </div>
       </div>

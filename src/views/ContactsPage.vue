@@ -66,10 +66,6 @@ const faqItems = [
     answer: 'Да, мы работаем 7 дней в неделю, 24 часа в сутки',
   },
   {
-    question: 'Есть ли выезд на объект?',
-    answer: 'Да, наш специалист может приехать для оценки бесплатно',
-  },
-  {
     question: 'Какие способы оплаты?',
     answer: 'Наличные, банковская карта, безналичный расчет',
   },
@@ -83,29 +79,20 @@ const faqItems = [
       <!-- Background image with overlay -->
       <div
         class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style="
-          background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
-        "
+        style="background-image: url('src/assets/photo-1584622650111-993a426fbf0a.jpg')"
       ></div>
       <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent"></div>
 
       <div class="hero-content text-center text-white relative z-10 px-4 pt-32 lg:pt-40">
         <div class="max-w-4xl" :class="{ 'animate-fade-in-up': isVisible }">
           <!-- Logo and Brand -->
-          <!-- <div class="flex justify-center items-center mb-8">
-            <div class="relative">
-              <div
-                class="bg-gradient-to-r from-blue-500 to-blue-600 p-6 rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
-              >
-                <img src="/src/assets/logo.png" alt="БлескOFF" class="h-12 w-auto" />
-              </div>
-              <div
-                class="absolute -top-2 -right-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full"
-              >
-                #1
-              </div>
+          <div class="flex justify-center items-center mb-8">
+            <div
+              class="bg-primary text-primary-content p-4 rounded-2xl shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300"
+            >
+              <span class="text-4xl font-bold">Блеск<span class="text-white">OFF</span></span>
             </div>
-          </div> -->
+          </div>
 
           <h1
             class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent"
@@ -384,93 +371,6 @@ const faqItems = [
                   </p>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CTA Section -->
-    <div class="relative py-20 overflow-hidden">
-      <!-- Background with gradient -->
-      <div class="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-800">
-        <div class="absolute inset-0 bg-black/20"></div>
-      </div>
-
-      <!-- Floating elements -->
-      <div
-        class="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full animate-bounce-slow"
-      ></div>
-      <div
-        class="absolute bottom-10 right-10 w-24 h-24 bg-blue-300/20 rounded-full animate-pulse"
-      ></div>
-      <div
-        class="absolute top-1/2 left-1/4 w-16 h-16 bg-purple-300/20 rounded-full animate-ping"
-      ></div>
-
-      <div class="container mx-auto px-4 text-center relative z-10">
-        <div class="max-w-4xl mx-auto">
-          <div
-            class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-white/20"
-          >
-            <Icon icon="heroicons:rocket-launch" class="w-5 h-5 text-yellow-300" />
-            <span class="text-sm font-medium text-white">Начните прямо сейчас</span>
-          </div>
-
-          <h2
-            class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 text-white"
-          >
-            Готовы начать
-            <span
-              class="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent"
-            >
-              сотрудничество?
-            </span>
-          </h2>
-
-          <p
-            class="text-lg sm:text-xl md:text-2xl mb-12 text-blue-100 max-w-3xl mx-auto leading-relaxed"
-          >
-            Свяжитесь с нами прямо сейчас и получите бесплатную консультацию. Мы поможем решить
-            любые задачи по клинингу!
-          </p>
-
-          <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <a
-              href="tel:+79034292665"
-              class="btn btn-lg bg-white text-blue-600 border-0 rounded-2xl px-8 py-4 font-bold text-lg hover:scale-105 hover:shadow-2xl transition-all duration-300 group"
-            >
-              <Icon
-                icon="heroicons:phone-20-solid"
-                class="w-6 h-6 mr-3 group-hover:animate-pulse"
-              />
-              Позвонить сейчас
-            </a>
-
-            <button
-              @click="goToForm"
-              class="btn btn-lg bg-transparent border-2 border-white text-white rounded-2xl px-8 py-4 font-bold text-lg hover:bg-white hover:text-blue-600 hover:scale-105 transition-all duration-300 group"
-            >
-              <Icon
-                icon="heroicons:chat-bubble-left-20-solid"
-                class="w-6 h-6 mr-3 group-hover:animate-bounce"
-              />
-              Заполнить форму
-            </button>
-          </div>
-
-          <div class="mt-12 flex flex-wrap justify-center gap-8 text-white/80">
-            <div class="flex items-center gap-2">
-              <Icon icon="heroicons:check-circle" class="w-5 h-5 text-green-300" />
-              <span>Бесплатная консультация</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <Icon icon="heroicons:check-circle" class="w-5 h-5 text-green-300" />
-              <span>Быстрый ответ</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <Icon icon="heroicons:check-circle" class="w-5 h-5 text-green-300" />
-              <span>Профессиональный подход</span>
             </div>
           </div>
         </div>
