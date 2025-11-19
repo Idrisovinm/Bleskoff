@@ -19,12 +19,19 @@
         </router-link>
       </div>
     </div>
-    <div class="flex flex-col gap-4 w-1/2 max-sm:w-full">
-      <h2 class="text-lg sm:text-xl text-white">О нас</h2>
-      <p class="text-white">
+    <div class="flex flex-col w-1/2 max-sm:w-full">
+      <h2 class="text-lg sm:text-xl text-white mb-4">О нас</h2>
+      <p class="text-white mb-4">
         БлескOFF — это команда, которая экономит Ваше время и помогает в выборе. Наши партнеры это
         проверенные компании на рынке клининговых услуг.
       </p>
+      <span class="text-gray-600 text-sm">ИНН: 9707052899</span>
+      <span class="text-gray-600 text-sm">ОГРН: 1257700490706</span>
+      <span class="text-gray-600 text-sm"
+        >Юр адрес: 127473, г. Москва, внт.тер.г. муниципальный округ Тверской, ул. Селезневская, д.
+        11А стр. 1</span
+      >
+      <span class="text-gray-600 text-sm">БИК банка: 044525593</span>
     </div>
     <div class="flex flex-col gap-4">
       <h2 class="text-lg sm:text-xl text-white">Контакты</h2>

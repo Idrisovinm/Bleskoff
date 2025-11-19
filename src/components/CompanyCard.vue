@@ -157,7 +157,7 @@ const handleOrder = () => {
             <!-- Order Button -->
             <button
               @click="handleOrder"
-              class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+              class="bg-blue-600 hover:bg-blue-700 cursor-pointer text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
             >
               Заказать
             </button>

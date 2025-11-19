@@ -108,7 +108,7 @@ const dateStore = useDateStore()
             <!-- Обязанности Исполнителя -->
             <div>
               <h3 class="text-lg font-semibold text-gray-800 mb-3">5.1. Исполнитель обязуется:</h3>
-              <ul class="list-disc list-inside space-y-2 pl-6">
+              <ul class="list-disc list-inside space-y-2 pl-6 text-gray-700">
                 <li>Оказать Услуги в соответствии с условиями настоящего Договора</li>
                 <li>Предоставить квалифицированные консультации по подбору клининговых компаний</li>
                 <li>Обеспечить конфиденциальность информации, полученной от Заказчика</li>
@@ -118,7 +118,7 @@ const dateStore = useDateStore()
             <!-- Обязанности Заказчика -->
             <div>
               <h3 class="text-lg font-semibold text-gray-800 mb-3">5.2. Заказчик обязуется:</h3>
-              <ul class="list-disc list-inside space-y-2 pl-6">
+              <ul class="list-disc list-inside space-y-2 pl-6 text-gray-700">
                 <li>Предоставить достоверную информацию, необходимую для оказания Услуг</li>
                 <li>Оплатить Услуги в порядке и сроки, предусмотренные Договором</li>
                 <li>Соблюдать условия настоящего Договора</li>
@@ -128,7 +128,7 @@ const dateStore = useDateStore()
             <!-- Права Исполнителя -->
             <div>
               <h3 class="text-lg font-semibold text-gray-800 mb-3">5.3. Исполнитель вправе:</h3>
-              <ul class="list-disc list-inside space-y-2 pl-6">
+              <ul class="list-disc list-inside space-y-2 pl-6 text-gray-700">
                 <li>
                   Требовать от Заказчика предоставления информации, необходимой для оказания Услуг
                 </li>
@@ -212,23 +212,26 @@ const dateStore = useDateStore()
             <div class="bg-gray-50 p-6 rounded-lg">
               <h3 class="text-lg font-semibold text-gray-800 mb-3">Исполнитель:</h3>
               <div class="space-y-2">
-                <p><strong>Наименование:</strong> БлескOFF</p>
-                <p><strong>Юридический адрес:</strong> [Ваш юридический адрес]</p>
-                <p><strong>ИНН:</strong> [Ваш ИНН]</p>
-                <p><strong>ОГРН:</strong> [Ваш ОГРН]</p>
-                <p><strong>Расчетный счет:</strong> [Ваш р/с]</p>
-                <p><strong>Банк:</strong> [Наименование банка]</p>
-                <p><strong>БИК:</strong> [БИК банка]</p>
-                <p><strong>Корреспондентский счет:</strong> [Корр. счет]</p>
+                <p><strong>Наименование:</strong> ООО "ЯМАГ-СТРОЙ"</p>
+                <p>
+                  <strong>Юридический адрес:</strong> 127473, г. Москва, внт.тер.г. муниципальный
+                  округ Тверской, ул. Селезневская, д. 11А стр. 1
+                </p>
+                <p><strong>ИНН:</strong> 9707052899</p>
+                <p><strong>ОГРН:</strong> 1257700490706</p>
+                <p><strong>Расчетный счет:</strong> 40702810901640002423</p>
+                <p><strong>Банк:</strong> АО "АЛЬФА-БАНК"</p>
+                <p><strong>БИК:</strong> 044525593</p>
+                <p><strong>Корреспондентский счет:</strong> 30101810200000000593</p>
                 <p><strong>Телефон:</strong> +7 (903) 429-26-65</p>
-                <p><strong>Email:</strong> blackoff84@mail.ru</p>
+                <p><strong>Email:</strong> bleskoff84@mail.ru</p>
               </div>
             </div>
           </div>
         </section>
 
         <!-- Подписи -->
-        <section>
+        <!-- <section>
           <h2 class="text-2xl font-semibold text-gray-800 mb-4">Статья 11. Подписи сторон</h2>
           <div class="space-y-4 text-gray-700">
             <div class="grid md:grid-cols-2 gap-6">
@@ -248,7 +251,7 @@ const dateStore = useDateStore()
               </div>
             </div>
           </div>
-        </section>
+        </section> -->
       </div>
 
       <!-- Кнопка возврата -->

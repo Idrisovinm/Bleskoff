@@ -186,7 +186,10 @@ const dateStore = useDateStore()
               <p><strong>Наименование:</strong> БлескOFF</p>
               <p><strong>Email:</strong> blackoff84@mail.ru</p>
               <p><strong>Телефон:</strong> +7 (903) 429-26-65</p>
-              <p><strong>Адрес для корреспонденции:</strong> [Юридический адрес]</p>
+              <p>
+                <strong>Адрес для корреспонденции:</strong> 127473, г. Москва, внт.тер.г.
+                муниципальный округ Тверской, ул. Селезневская, д. 11А стр. 1
+              </p>
             </div>
           </div>
         </section>

@@ -134,7 +134,10 @@ const dateStore = useDateStore()
             <div class="bg-gray-50 p-4 rounded-lg">
               <p><strong>Email:</strong> blackoff84@mail.ru</p>
               <p><strong>Телефон:</strong> +7 (903) 429-26-65</p>
-              <p><strong>Адрес:</strong> [Ваш юридический адрес]</p>
+              <p>
+                <strong>Адрес:</strong> 127473, г. Москва, внт.тер.г. муниципальный округ Тверской,
+                ул. Селезневская, д. 11А стр. 1
+              </p>
             </div>
           </div>
         </section>

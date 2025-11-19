@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
+import aboutHero from '@/assets/towfiqu-barbhuiya--9gPKrsbGmc-unsplash.jpg'
 </script>
 
 <template>
@@ -7,10 +8,7 @@ import { Icon } from '@iconify/vue'
     <!-- Hero Section -->
     <div class="relative min-h-screen overflow-hidden">
       <!-- Background with overlay -->
-      <div
-        class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style="background-image: url('/src/assets/towfiqu-barbhuiya--9gPKrsbGmc-unsplash.jpg')"
-      ></div>
+      <img :src="aboutHero" alt="" class="absolute inset-0 w-full h-full object-cover" />
       <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent"></div>
 
       <!-- Content -->

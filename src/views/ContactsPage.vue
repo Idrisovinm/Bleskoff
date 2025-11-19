@@ -2,6 +2,7 @@
 import { Icon } from '@iconify/vue'
 import { useRouter } from 'vue-router'
 import { ref, onMounted } from 'vue'
+import contactsHero from '@/assets/photo-1584622650111-993a426fbf0a.jpg'
 
 const router = useRouter()
 const isVisible = ref(false)
@@ -77,10 +78,11 @@ const faqItems = [
     <!-- Hero Section -->
     <div class="hero min-h-screen relative overflow-hidden">
       <!-- Background image with overlay -->
-      <div
-        class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style="background-image: url('src/assets/photo-1584622650111-993a426fbf0a.jpg')"
-      ></div>
+-      <img
+        :src="contactsHero"
+        alt=""
+        class="absolute inset-0 w-full h-full object-cover"
+      />
       <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent"></div>
 
       <div class="hero-content text-center text-white relative z-10 px-4 pt-32 lg:pt-40">

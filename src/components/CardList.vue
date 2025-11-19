@@ -23,6 +23,9 @@ const searchQuery = ref('')
 
 const selectedSort = ref<'asc' | 'desc' | null>(null)
 
+// Объявляем входной проп companies
+const props = defineProps<{ companies: Company[] }>()
+
 // Данные калькулятора - только диапазон бюджета
 const calculatorData = ref({
   budgetFrom: null as number | null,
@@ -59,7 +62,8 @@ const filteredCompanies = computed(() => {
   const sortType = selectedSort.value
   const { budgetFrom, budgetTo } = calculatorData.value
 
-  let filtered = companyCard
+  // Используем переданный проп companies, если он есть, иначе fallback на companyCard
+  let filtered = props.companies && props.companies.length ? props.companies : companyCard
 
   // Фильтрация по поисковому запросу
   if (searchLower.length > 0) {

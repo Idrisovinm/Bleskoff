@@ -3,6 +3,7 @@ import CooperationForm from '@/components/CooperationPage/CooperationForm.vue'
 import ContactModal from '@/components/ContactModal.vue'
 import { Icon } from '@iconify/vue'
 import { useContactStore } from '@/stores/contactStore'
+import cooperationHero from '@/assets/photo-1556228453-efd6c1ff04f6.jpg'
 
 const contactStore = useContactStore()
 
@@ -24,10 +25,11 @@ const openContactModal = () => {
     <!-- Hero Section -->
     <div class="relative min-h-screen overflow-hidden">
       <!-- Background with overlay -->
-      <div
-        class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style="background-image: url('/src/assets/photo-1556228453-efd6c1ff04f6.jpg')"
-      ></div>
+      <img
+        :src="cooperationHero"
+        alt=""
+        class="absolute inset-0 w-full h-full object-cover"
+      />
       <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent"></div>
 
       <!-- Content -->

@@ -5,7 +5,7 @@ import BurgerButton from './BurgerButton.vue'
 import { useContactStore } from '@/stores/contactStore'
 
 const navigation = [
-  { name: 'Топ компаний', path: '/' },
+  { name: 'Главная', path: '/' },
   { name: 'О нас', path: '/about-us' },
   { name: 'Сотрудничество', path: '/cooperation' },
   { name: 'Контакты', path: '/contacts' },
